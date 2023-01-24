@@ -1,10 +1,11 @@
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommend",
     "plugin:import/errors",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
+    "plugin:@typescript-eslint/recommend",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "prettier"
   ],
   "rules": {
