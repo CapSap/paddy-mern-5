@@ -4,7 +4,7 @@
     "plugin:import/errors",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:@typescript-eslint/recommend",
+    "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "prettier"
   ],
@@ -28,15 +28,16 @@
     "node": true
   },
   "settings": {
-  "react": {
-    "version": "detect"
-  },
-  "import/parsers": {
-    "@typescript-eslint/parser": [".ts", ".tsx"]
-  },
-  "import/resolver": {
-    "typescript": {
-      "alwaysTryTypes": true
+    "react": {
+      "version": "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true
+      }
     }
   }
 }
