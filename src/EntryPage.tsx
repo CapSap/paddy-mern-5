@@ -48,4 +48,8 @@ type orderInfo = {
   ];
 };
 
-export const Entry = () => <div>hello entry</div>;
+export const Entry = () => (
+  <div>
+    <h1 className="text-3xl font-bold underline">Hello entry!</h1>
+  </div>
+);
