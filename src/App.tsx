@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { Entry } from "./EntryPage";
+import { Entry } from "./Entry";
 
 const App = () => {
   return (
