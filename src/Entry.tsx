@@ -3,20 +3,49 @@ import { useState } from "react";
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
   const [customerName, setCustomerName] = useState<string>();
-  const [pickupLocation, setPickupLocation] = useState();
-  const [notes, setNotes] = useState();
+  const [pickupLocation, setPickupLocation] = useState<string>();
+  const [notes, setNotes] = useState<string>();
+  const [fourHour, setFourHour] = useState(false);
 
-  const [orderedItems, setOrderedItems] = useState([]);
+  const [orderedItems, setOrderedItems] = useState([
+    {
+      items: "intial",
+      sendingStore: "",
+    },
+  ]);
 
-  function handleChange(e) {
-    console.log(e);
+  function handleGetMoreRequests() {
+    setOrderedItems((prevState) => {
+      return [...prevState, { items: "", sendingStore: "" }];
+    });
   }
 
   function handleOrderedItemsChange(e, index: number) {
-    console.log(e, index);
-  }
+    setOrderedItems((prevState) => {
+      const updatedRequest = {
+        ...prevState[index],
+        [e.target.name]: e.target.value,
+      };
 
-  function onFormSubmit(e) {}
+      return [
+        ...prevState.slice(0, index),
+        updatedRequest,
+        ...prevState.slice(index + 1),
+      ];
+    });
+  }
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    const payload = {
+      orderNumber: orderNumber,
+      customerName: customerName,
+      pickupLocation: pickupLocation,
+      notes: notes,
+      fourHour: fourHour,
+      orderedItems: orderedItems,
+    };
+    console.log(payload);
+  }
 
   return (
     <>
@@ -80,9 +109,8 @@ export const Entry = () => {
             <select
               required={true}
               id="pickupLocation"
-              onChange={(e) => {
-                handleChange(e);
-              }}
+              value={pickupLocation}
+              onChange={(e) => setPickupLocation(e.target.value)}
               className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
             >
               <option disabled value="">
@@ -113,7 +141,8 @@ export const Entry = () => {
                     id="fourHour"
                     name="fourHour"
                     type="checkbox"
-                    onChange={(e) => handleChange(e)}
+                    onChange={(e) => setFourHour((prev) => !prev)}
+                    checked={fourHour}
                     className="ml-2 focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                   ></input>
                 </div>
@@ -138,10 +167,10 @@ export const Entry = () => {
               Notes:{" "}
             </label>
             <textarea
-              type="text"
               name="notes"
               id="notes"
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => setNotes(e.target.value)}
+              value={notes}
               className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
             ></textarea>
           </div>
@@ -150,7 +179,7 @@ export const Entry = () => {
             <p>Make multiple requests: </p>
             <button
               type="button"
-              onClick={(e) => handleClick(e)}
+              onClick={(e) => handleGetMoreRequests(e)}
               className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
             >
               {" "}
@@ -166,6 +195,72 @@ export const Entry = () => {
           >
             Send order/request to store
           </button>
+          {orderedItems.map((request, index) => {
+            console.log(request);
+            return (
+              <div>
+                <p>Request #{index + 1}</p>
+                <div>
+                  <label
+                    className="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                    htmlFor="items"
+                  >
+                    Item(s):{" "}
+                  </label>
+                  <textarea
+                    required={true}
+                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                    id={"items" + index}
+                    name="items"
+                    key={"items" + index}
+                    value={request.items}
+                    onChange={(e) => {
+                      handleOrderedItemsChange(e, index);
+                    }}
+                  />
+                </div>
+                <div>
+                  <label
+                    className="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                    htmlFor="sendingStore"
+                  >
+                    Sending Store:{" "}
+                  </label>
+                  <select
+                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                    id={"sendingStore" + index}
+                    name="sendingStore"
+                    key={"sendingStore" + index}
+                    value={request.sendingStore}
+                    onChange={(e) => {
+                      handleOrderedItemsChange(e, index);
+                    }}
+                  >
+                    <option value="Canberra">Canberra - 213</option>
+                    <option value="Fortitude Valley">
+                      Fortitude Valley - 416
+                    </option>
+                    <option value="Hobart">Hobart - 710</option>
+                    <option value="Melbourne">Melbourne - 314</option>
+                    <option value="Seven Hills">Seven Hills - 208</option>
+                    <option value="Perth">Perth - 615</option>
+                    <option value="Ringwood">Ringwood - 319</option>
+                    <option value="Sydney">Sydney - 210</option>
+                  </select>
+                </div>
+              </div>
+            );
+          })}
+          <div className="md:col-span-2 flex flex-col justify-center items-center">
+            {" "}
+            <button
+              type="button"
+              onClick={(e) => handleFormSubmit(e)}
+              className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </>
