@@ -1,5 +1,46 @@
 import React, { useState } from "react";
 
+type StoreLocation =
+  | "Melbourne"
+  | "Sydney"
+  | "Ringwood"
+  | "Canberra"
+  | "Seven Hills"
+  | "Fortutude Valley"
+  | "Perth"
+  | "Hobart";
+
+type OrderInfo = {
+  orderNumber: string;
+  customerName: string;
+  pickupLocation?: StoreLocation;
+  orderedItems: Request[];
+  fourHour: false;
+  hasIssue: boolean;
+  orderCommentHistory?: [
+    {
+      author: string;
+      store: StoreLocation;
+      message: string;
+      dateTime: string;
+    }
+  ];
+};
+
+type Request = {
+  sendingStore?: StoreLocation;
+  requestStatus: string | undefined;
+  items?: string;
+  requestCommentHistory?: [
+    {
+      author: string;
+      store: StoreLocation;
+      message: string;
+      dateTime: string;
+    }
+  ];
+};
+
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
   const [customerName, setCustomerName] = useState<string>();
@@ -10,13 +51,17 @@ export const Entry = () => {
   const [orderedItems, setOrderedItems] = useState([
     {
       items: "intial",
-      sendingStore: "",
+      sendingStore: undefined,
+      requestStatus: "created",
     },
   ]);
 
   function handleGetMoreRequests() {
     setOrderedItems((prevState) => {
-      return [...prevState, { items: "", sendingStore: "" }];
+      return [
+        ...prevState,
+        { items: "", sendingStore: undefined, requestStatus: "created" },
+      ];
     });
   }
 
@@ -42,7 +87,7 @@ export const Entry = () => {
     });
   }
   function handleFormSubmit() {
-    const payload = {
+    const payload: OrderInfo = {
       orderNumber: orderNumber,
       customerName: customerName,
       pickupLocation: pickupLocation,
