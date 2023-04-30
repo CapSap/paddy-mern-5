@@ -15,8 +15,9 @@ type OrderInfo = {
   customerName: string;
   pickupLocation?: StoreLocation;
   orderedItems: Request[];
-  fourHour: false;
+  fourHour: boolean;
   hasIssue: boolean;
+  notes?: string;
   orderCommentHistory?: [
     {
       author: string;
@@ -43,14 +44,15 @@ type Request = {
 
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
+  const [orderNumberDirty, setOrderNumberDirty] = useState(false);
   const [customerName, setCustomerName] = useState<string>();
-  const [pickupLocation, setPickupLocation] = useState<string>();
+  const [pickupLocation, setPickupLocation] = useState<StoreLocation>();
   const [notes, setNotes] = useState<string>();
   const [fourHour, setFourHour] = useState(false);
 
-  const [orderedItems, setOrderedItems] = useState([
+  const [orderedItems, setOrderedItems] = useState<Request[]>([
     {
-      items: "intial",
+      items: "",
       sendingStore: undefined,
       requestStatus: "created",
     },
@@ -72,7 +74,6 @@ export const Entry = () => {
       | React.ChangeEvent<HTMLSelectElement>,
     index: number
   ) {
-    console.log(e);
     setOrderedItems((prevState) => {
       const updatedRequest = {
         ...prevState[index],
@@ -87,6 +88,13 @@ export const Entry = () => {
     });
   }
   function handleFormSubmit() {
+    if (
+      orderNumber === undefined ||
+      customerName === undefined ||
+      pickupLocation === undefined
+    ) {
+      return new Error("invalid info");
+    }
     const payload: OrderInfo = {
       orderNumber: orderNumber,
       customerName: customerName,
@@ -94,6 +102,7 @@ export const Entry = () => {
       notes: notes,
       fourHour: fourHour,
       orderedItems: orderedItems,
+      hasIssue: false,
     };
     console.log(payload);
   }
@@ -128,9 +137,19 @@ export const Entry = () => {
               name="orderNumber"
               id="orderNumber"
               value={orderNumber}
-              onChange={(e) => setOrderNumber(e.target.value)}
+              onChange={(e) => {
+                setOrderNumber(e.target.value);
+              }}
+              onFocus={() => setOrderNumberDirty(true)}
               className=" w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
             />
+
+            {!orderNumber && orderNumberDirty ? (
+              <p>Please enter an order number</p>
+            ) : null}
+            {orderNumber?.length != 10 && orderNumberDirty ? (
+              <p>Order number might be missing a digit</p>
+            ) : null}
           </div>
           <div>
             <label
@@ -160,10 +179,12 @@ export const Entry = () => {
               required={true}
               id="pickupLocation"
               value={pickupLocation}
-              onChange={(e) => setPickupLocation(e.target.value)}
+              onChange={(e) => {
+                setPickupLocation(e.target.value as StoreLocation);
+              }}
               className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
             >
-              <option disabled value="">
+              <option selected={true} disabled={true} value={undefined}>
                 Please select a store
               </option>
 
@@ -246,7 +267,6 @@ export const Entry = () => {
             Send order/request to store
           </button>
           {orderedItems.map((request, index) => {
-            console.log(request);
             return (
               <div>
                 <p>Request #{index + 1}</p>
@@ -286,6 +306,10 @@ export const Entry = () => {
                       handleOrderedItemsChange(e, index);
                     }}
                   >
+                    <option selected={true} value={undefined} disabled={true}>
+                      Please choose an option
+                    </option>
+
                     <option value="Canberra">Canberra - 213</option>
                     <option value="Fortitude Valley">
                       Fortitude Valley - 416
