@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
@@ -20,7 +20,14 @@ export const Entry = () => {
     });
   }
 
-  function handleOrderedItemsChange(e, index: number) {
+  function handleOrderedItemsChange(
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+    index: number
+  ) {
+    console.log(e);
     setOrderedItems((prevState) => {
       const updatedRequest = {
         ...prevState[index],
@@ -34,8 +41,7 @@ export const Entry = () => {
       ];
     });
   }
-  function handleFormSubmit(e) {
-    e.preventDefault();
+  function handleFormSubmit() {
     const payload = {
       orderNumber: orderNumber,
       customerName: customerName,
@@ -62,7 +68,6 @@ export const Entry = () => {
         <form
           method="POST"
           action="/"
-          onSubmit={(e) => onFormSubmit(e)}
           className="max-w-screen-md grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto"
         >
           <div>
@@ -179,7 +184,7 @@ export const Entry = () => {
             <p>Make multiple requests: </p>
             <button
               type="button"
-              onClick={(e) => handleGetMoreRequests(e)}
+              onClick={() => handleGetMoreRequests()}
               className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
             >
               {" "}
@@ -255,7 +260,7 @@ export const Entry = () => {
             {" "}
             <button
               type="button"
-              onClick={(e) => handleFormSubmit(e)}
+              onClick={() => handleFormSubmit()}
               className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
             >
               Submit
