@@ -7,6 +7,8 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
+// console.log(asd);
+
 console.log("test1212");
 
 app.listen(port, () => {
