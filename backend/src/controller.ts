@@ -4,40 +4,32 @@ import { Request, Response } from "express";
 
 export const createOne =
   (model: Model<Order>) => async (req: Request, res: Response) => {
-    const newDoc: HydratedDocument<Order> = await model.create({ ...req.body });
-    console.log(newDoc);
-    if (!newDoc) {
-      res.status(400).end();
-    }
-    res.status(200).json({ data: newDoc });
-  };
-
-export const createOne2 =
-  (model: Model<Order>) => async (req: Request, res: Response) => {
     try {
       const newDoc: HydratedDocument<Order> = await model.create({
         ...req.body,
       });
-      console.log(newDoc);
+      if (!newDoc) {
+        res.status(400).end();
+      }
       res.status(200).json({ data: newDoc });
-    } catch {
-      (e: Error) => console.log(e);
+    } catch (e) {
+      console.error(e);
+      res.status(400).end();
     }
-  };
-
-export const createOne4 =
-  (model: Model<Order>) => async (req: Request, res: Response) => {
-    const newDoc = new model({ ...req.body });
-    await newDoc.save().then(() => {
-      console.log(newDoc);
-    });
-    res.send({ data: newDoc });
   };
 
 export const getMany =
   (model: Model<Order>) => async (req: Request, res: Response) => {
-    const docs = await model.find({}).exec();
-    res.status(200).json({ data: docs });
+    try {
+      const docs = await model.find({ ...req.body }).exec();
+      if (!docs) {
+        res.status(400).end();
+      }
+      res.status(200).json({ data: docs });
+    } catch (e) {
+      console.error(e);
+      res.status(400).end();
+    }
   };
 
 export const deleteAll =
@@ -45,8 +37,9 @@ export const deleteAll =
     try {
       const noOfDeletions = await model.deleteMany({});
       res.send({ data: `${noOfDeletions.deletedCount} documents deleted` });
-    } catch {
-      (e: Error) => console.log(e);
+    } catch (e) {
+      console.error(e);
+      res.status(400).end();
     }
   };
 
@@ -58,8 +51,14 @@ export const updateOne =
         req.body,
         { new: true }
       );
+
+      if (!doc) {
+        return res.status(400).end();
+      }
+
       res.status(200).json({ data: doc });
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      res.status(400).end();
     }
   };
