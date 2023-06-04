@@ -22,7 +22,7 @@ async function mongoConnect() {
 }
 mongoConnect();
 
-// app.use(cors());
+app.use(cors());
 // enable cors (cross origin response)
 app.use(express.json());
 // json middleware gets the raw bytes and attatches to req.body
