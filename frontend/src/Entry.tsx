@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 
 type StoreLocation =
   | "Melbourne"
@@ -87,7 +87,8 @@ export const Entry = () => {
       ];
     });
   }
-  function handleFormSubmit() {
+  async function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     if (
       orderNumber === undefined ||
       customerName === undefined ||
@@ -104,7 +105,21 @@ export const Entry = () => {
       orderedItems: orderedItems,
       hasIssue: false,
     };
-    console.log(payload);
+
+    const response = await fetch("http://localhost:3000/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!response.ok) {
+      throw new Error("API error");
+    }
+    console.log(response);
+  }
+
+  async function getAllOrders() {
+    const response = await fetch("http://localhost:3000/orders");
+    console.log(await response.json());
   }
 
   return (
@@ -122,6 +137,7 @@ export const Entry = () => {
         <form
           method="POST"
           action="/"
+          onSubmit={(e) => handleFormSubmit(e)}
           className="max-w-screen-md grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto"
         >
           <div>
@@ -326,16 +342,20 @@ export const Entry = () => {
             );
           })}
           <div className="md:col-span-2 flex flex-col justify-center items-center">
-            {" "}
             <button
-              type="button"
-              onClick={() => handleFormSubmit()}
+              type="submit"
               className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
             >
               Submit
             </button>
           </div>
         </form>
+        <button
+          onClick={() => getAllOrders()}
+          className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+        >
+          get orders
+        </button>
       </div>
     </>
   );
