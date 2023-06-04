@@ -1,16 +1,12 @@
 import express from "express";
+import { createOne, deleteAll, getMany } from "./controller";
+import { Order } from "./model";
 
 const router = express.Router();
 
-router
-  .route("/")
-  .get((req, res) => {
-    res.status(200);
-    res.send({ message: "get all orders" });
-  })
-  .post((req, res) => {
-    res.send({ message: `create an entry in db` });
-  });
+router.route("/").get(getMany(Order)).post(createOne(Order));
+
+router.route("/deleteAll").delete(deleteAll(Order));
 
 router
   .route("/:id")
