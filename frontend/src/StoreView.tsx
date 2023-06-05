@@ -3,6 +3,7 @@ import { RequestCard } from "./RequestCard";
 
 export const StoreView = () => {
   const [allOrders, setAllOrders] = useState();
+  const [store, setStore] = useState();
 
   useEffect(() => {
     getAllOrders();
@@ -15,16 +16,43 @@ export const StoreView = () => {
   }
 
   if (!allOrders) {
-    return <div>no data</div>;
+    return <div>fetching data...</div>;
   }
+
+  // i need some functions to filter out allOrders and get relevant todos.
+
+  const currentStoreTodos = allOrders.filter((order) => {
+    order.orderedItems.some(request => request.sendingStore === store)
+  }
+ )
+  };
+
+  const incomingOrders = allOrders.filter((order) => {
+    return order === store;
+  });
 
   return (
     <div>
-      <div className="flex">
-        <h2>todos</h2>
-        {allOrders.map((order) => {
-          return <RequestCard request={order} />;
-        })}
+      <div>Welcome message + instructions?</div>
+      <div className="p-6 ">
+        <div className="flex ">
+          <h2 className="w-24">todos</h2>
+          {allOrders.map((order) => {
+            return <RequestCard request={order} />;
+          })}
+        </div>
+        <div className="flex">
+          <h2 className="w-24">incoming</h2>
+          {allOrders.map((order) => {
+            return <RequestCard request={order} />;
+          })}
+        </div>
+        <div className="flex">
+          <h2 className="w-24">problem</h2>
+          {allOrders.map((order) => {
+            return <RequestCard request={order} />;
+          })}
+        </div>
       </div>
     </div>
   );
