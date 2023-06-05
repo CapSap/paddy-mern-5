@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
-    "dev": "vite",
+    "dev": "concurrently \"npm run vite\" \"cd ../backend && npm run server\"",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "vite": "vite"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +21,7 @@
     "@typescript-eslint/parser": "^5.40.1",
     "@vitejs/plugin-react": "^3.0.1",
     "autoprefixer": "^10.4.13",
+    "concurrently": "^8.1.0",
     "eslint": "^8.32.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.1",
