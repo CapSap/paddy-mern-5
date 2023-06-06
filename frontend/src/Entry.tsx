@@ -1,46 +1,5 @@
 import React, { FormEvent, useState } from "react";
-
-type StoreLocation =
-  | "Melbourne"
-  | "Sydney"
-  | "Ringwood"
-  | "Canberra"
-  | "Seven Hills"
-  | "Fortutude Valley"
-  | "Perth"
-  | "Hobart";
-
-type OrderInfo = {
-  orderNumber: string;
-  customerName: string;
-  pickupLocation?: StoreLocation;
-  orderedItems: Request[];
-  fourHour: boolean;
-  hasIssue: boolean;
-  notes?: string;
-  orderCommentHistory?: [
-    {
-      author: string;
-      store: StoreLocation;
-      message: string;
-      dateTime: string;
-    }
-  ];
-};
-
-type Request = {
-  sendingStore?: StoreLocation;
-  requestStatus: string | undefined;
-  items?: string;
-  requestCommentHistory?: [
-    {
-      author: string;
-      store: StoreLocation;
-      message: string;
-      dateTime: string;
-    }
-  ];
-};
+import { StoreLocation, Request, OrderInfo } from "./Types";
 
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
