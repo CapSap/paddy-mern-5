@@ -9,7 +9,6 @@ export type StoreLocation =
   | "Hobart";
 
 export type OrderInfo = {
-  _id: string;
   orderNumber: string;
   customerName: string;
   pickupLocation?: StoreLocation;
@@ -26,6 +25,8 @@ export type OrderInfo = {
     }
   ];
 };
+
+export type OrderInfoFromDB = OrderInfo & { _id: string };
 
 export type Request = {
   sendingStore?: StoreLocation;
