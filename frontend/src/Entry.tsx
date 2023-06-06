@@ -171,7 +171,7 @@ export const Entry = () => {
               <option value="Perth">Perth - 615</option>
               <option value="Ringwood">Ringwood - 319</option>
               <option value="Sydney">Sydney - 210</option>
-            </select>{" "}
+            </select>
           </div>
           <div>
             <label
