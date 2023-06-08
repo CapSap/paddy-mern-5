@@ -8,14 +8,15 @@ export type StoreLocation =
   | "Perth"
   | "Hobart";
 
-export type OrderInfo = {
+export type Order = {
   orderNumber: string;
   customerName: string;
   pickupLocation?: StoreLocation;
   orderedItems: Request[];
-  fourHour: boolean;
-  hasIssue: boolean;
+  isFourHour: boolean;
   notes?: string;
+  isArchived: boolean;
+  hasIssue: boolean;
   orderCommentHistory?: [
     {
       author: string;
@@ -26,7 +27,7 @@ export type OrderInfo = {
   ];
 };
 
-export type OrderInfoFromDB = OrderInfo & { _id: string };
+export type OrderInfoFromDB = Order & { _id: string };
 
 export type Request = {
   sendingStore?: StoreLocation;

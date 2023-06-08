@@ -1,23 +1,47 @@
 import { Timestamp } from "mongodb";
 import mongoose from "mongoose";
 
+type StoreLocation =
+  | "Melbourne"
+  | "Sydney"
+  | "Ringwood"
+  | "Canberra"
+  | "Seven Hills"
+  | "Fortutude Valley"
+  | "Perth"
+  | "Hobart";
+
 export interface Order {
   orderNumber: string;
   customerName: string;
-  pickupLocation: string;
-  notes: string;
-  isArchived: boolean;
+  pickupLocation: StoreLocation;
   orderedItems: request[];
   isFourHour: boolean;
+  notes: string;
+  isArchived: boolean;
+  hasIssue: boolean;
+  orderCommentHistory?: [
+    {
+      author: string;
+      store: StoreLocation;
+      message: string;
+      dateTime: string;
+    }
+  ];
 }
 
 interface request {
-  items: string;
-  sendingStore: string;
-  ibt: number;
-  tracking: string;
-  message: string;
-  requestStatus: string;
+  sendingStore?: StoreLocation;
+  requestStatus: string | undefined;
+  items?: string;
+  requestCommentHistory?: [
+    {
+      author: string;
+      store: StoreLocation;
+      message: string;
+      dateTime: string;
+    }
+  ];
 }
 
 const orderSchema = new mongoose.Schema(
