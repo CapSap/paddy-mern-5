@@ -20,15 +20,18 @@ export const StoreView = () => {
     return <div>fetching data...</div>;
   }
 
-  // i need some functions to filter out allOrders and get relevant todos.
-
-  const currentStoreTodos = allOrders.filter((order) => {
+  // simple cncs are where the collection store and sending store (store providing stock is the same)
+  const simpleCncs = allOrders.filter((order) => {
     return order.orderedItems.some((request) => {
       return request.sendingStore === store;
     });
   });
 
-  console.log(currentStoreTodos);
+  const postingCncs = allOrders.filter((order) => {
+    return order.orderedItems.filter(
+      (request) => request.sendingStore !== store
+    );
+  });
 
   const incomingOrders = allOrders.filter((order) => {
     return order.pickupLocation === store;
@@ -77,38 +80,46 @@ export const StoreView = () => {
         </select>
       </div>
 
+      {/* store cncs vs posting cncs are key part of MVP */}
+
       <div className="p-6 ">
         <div className="flex flex-wrap">
-          <h2 className="w-24">todos</h2>
-          {currentStoreTodos.length > 1 ? (
-            currentStoreTodos.map((order) => {
-              return <RequestCard order={order} id={order._id} />;
+          <h2 className="w-24">CNCs for your store</h2>
+          {simpleCncs.length > 1 ? (
+            simpleCncs.map((order) => {
+              return <RequestCard store={store} order={order} id={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>
           )}
         </div>
 
-        {/* maybe i should also include CNCs todo for your location, 
-  CNCs for you to post to another store
-
-*/}
-
-        <div className="flex">
-          <h2 className="w-24">incoming</h2>
-          {incomingOrders.length > 1 ? (
-            incomingOrders.map((order) => {
-              return <RequestCard order={order} id={order._id} />;
+        <div className="flex flex-wrap">
+          <h2 className="w-24">CNCs to post to another store</h2>
+          {postingCncs.length > 1 ? (
+            postingCncs.map((order) => {
+              return <RequestCard store={store} order={order} id={order._id} />;
             })
           ) : (
-            <div>no orders incoming</div>
+            <div>There are no todos for you!</div>
+          )}
+        </div>
+
+        <div className="flex">
+          <h2 className="w-24">CNCs incoming to your store</h2>
+          {incomingOrders.length > 1 ? (
+            incomingOrders.map((order) => {
+              return <RequestCard store={store} order={order} id={order._id} />;
+            })
+          ) : (
+            <div>No orders incoming</div>
           )}
         </div>
         <div className="flex">
-          <h2 className="w-24">problem</h2>
-          {allOrders.length > 1 ? (
-            allOrders.map((order) => {
-              return <RequestCard order={order} id={order._id} />;
+          <h2 className="w-24">Problem CNCs</h2>
+          {problemOrders.length > 1 ? (
+            problemOrders.map((order) => {
+              return <RequestCard store={store} order={order} id={order._id} />;
             })
           ) : (
             <div>No orders with problems</div>
@@ -116,21 +127,15 @@ export const StoreView = () => {
         </div>
         <div className="flex ">
           <h2 className="w-24">Awaiting collection</h2>
-          {awaitingCollectionOrders ? (
+          {awaitingCollectionOrders.length > 1 ? (
             awaitingCollectionOrders.map((order) => {
-              return <RequestCard order={order} id={order._id} />;
+              return <RequestCard store={store} order={order} id={order._id} />;
             })
           ) : (
             <div>
               App thinks there are no orders awaitng customer collection
             </div>
           )}
-        </div>
-        <div className="flex ">
-          <h2 className="w-24">All Orders</h2>
-          {problemOrders.map((order) => {
-            return <RequestCard order={order} id={order._id} />;
-          })}
         </div>
       </div>
     </div>
