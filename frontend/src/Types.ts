@@ -33,6 +33,7 @@ export type Request = {
   sendingStore?: StoreLocation;
   requestStatus: string | undefined;
   items?: string;
+  tracking: string;
   requestCommentHistory?: [
     {
       author: string;
