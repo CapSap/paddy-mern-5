@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { StoreLocation, Request, OrderInfo } from "./Types";
+import { StoreLocation, Request, Order } from "./Types";
 
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
@@ -7,7 +7,7 @@ export const Entry = () => {
   const [customerName, setCustomerName] = useState<string>();
   const [pickupLocation, setPickupLocation] = useState<StoreLocation>();
   const [notes, setNotes] = useState<string>();
-  const [fourHour, setFourHour] = useState(false);
+  const [isFourHour, setFourHour] = useState(false);
 
   const [orderedItems, setOrderedItems] = useState<Request[]>([
     {
@@ -55,12 +55,13 @@ export const Entry = () => {
     ) {
       return new Error("invalid info");
     }
-    const payload: OrderInfo = {
+    const payload: Order = {
       orderNumber: orderNumber,
       customerName: customerName,
       pickupLocation: pickupLocation,
       notes: notes,
-      fourHour: fourHour,
+      isArchived: false,
+      isFourHour: isFourHour,
       orderedItems: orderedItems,
       hasIssue: false,
     };
@@ -188,7 +189,7 @@ export const Entry = () => {
                     name="fourHour"
                     type="checkbox"
                     onChange={(e) => setFourHour((prev) => !prev)}
-                    checked={fourHour}
+                    checked={isFourHour}
                     className="ml-2 focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
                   ></input>
                 </div>

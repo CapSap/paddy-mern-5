@@ -6,7 +6,7 @@ const App = () => {
   return (
     <div>
       <StoreView />
-      {/* <Entry /> */}
+      <Entry />
     </div>
   );
 };
