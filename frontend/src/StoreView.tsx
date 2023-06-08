@@ -37,7 +37,6 @@ export const StoreView = () => {
   const problemOrders = allOrders.filter((order) => {
     console.log(order.hasIssue);
     return order.hasIssue;
-    // !!! js types and schema do not match. need to fixdis
   });
 
   const awaitingCollectionOrders = allOrders.filter((order) => {
