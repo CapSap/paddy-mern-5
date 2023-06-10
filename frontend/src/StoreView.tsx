@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { RequestCard } from "./RequestCard";
 import { Order, OrderInfoFromDB, StoreLocation } from "./Types";
+import { RequestCardFulll } from "./RequestCardFull";
 
 export const StoreView = () => {
   const [allOrders, setAllOrders] = useState<OrderInfoFromDB[]>();
@@ -22,14 +23,16 @@ export const StoreView = () => {
 
   // simple cncs are where the collection store and sending store (store providing stock is the same)
   const simpleCncs = allOrders.filter((order) => {
-    return order.orderedItems.some((request) => {
-      return request.sendingStore === store;
-    });
+    return (
+      order.pickupLocation === store &&
+      order.orderedItems.some((request) => request.sendingStore === store)
+    );
   });
 
   const postingCncs = allOrders.filter((order) => {
-    return order.orderedItems.filter(
-      (request) => request.sendingStore !== store
+    return (
+      order.pickupLocation !== store &&
+      order.orderedItems.some((request) => request.sendingStore === store)
     );
   });
 
@@ -80,8 +83,6 @@ export const StoreView = () => {
         </select>
       </div>
 
-      {/* store cncs vs posting cncs are key part of MVP */}
-
       <div className="p-6 ">
         <div className="flex flex-wrap">
           <h2 className="w-24">CNCs for your store</h2>
@@ -101,15 +102,17 @@ export const StoreView = () => {
               return <RequestCard store={store} order={order} id={order._id} />;
             })
           ) : (
-            <div>There are no todos for you!</div>
+            <div>There are no cns for you to post out!</div>
           )}
         </div>
 
-        <div className="flex">
+        <div className="flex flex-wrap">
           <h2 className="w-24">CNCs incoming to your store</h2>
           {incomingOrders.length > 1 ? (
             incomingOrders.map((order) => {
-              return <RequestCard store={store} order={order} id={order._id} />;
+              return (
+                <RequestCardFulll store={store} order={order} id={order._id} />
+              );
             })
           ) : (
             <div>No orders incoming</div>
@@ -125,7 +128,7 @@ export const StoreView = () => {
             <div>No orders with problems</div>
           )}
         </div>
-        <div className="flex ">
+        <div className="flex flex-wrap">
           <h2 className="w-24">Awaiting collection</h2>
           {awaitingCollectionOrders.length > 1 ? (
             awaitingCollectionOrders.map((order) => {
