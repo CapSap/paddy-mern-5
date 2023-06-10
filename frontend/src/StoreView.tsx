@@ -84,19 +84,23 @@ export const StoreView = () => {
       </div>
 
       <div className="p-6 ">
-        <div className="flex flex-wrap">
-          <h2 className="w-24">CNCs for your store</h2>
-          {simpleCncs.length > 1 ? (
-            simpleCncs.map((order) => {
-              return <RequestCard store={store} order={order} id={order._id} />;
-            })
-          ) : (
-            <div>There are no todos for you!</div>
-          )}
+        <div className="flex">
+          <h2 className="w-1/4">CNCs for your store</h2>
+          <div className="w-3/4 grid grid-cols-3">
+            {simpleCncs.length > 1 ? (
+              simpleCncs.map((order) => {
+                return (
+                  <RequestCard store={store} order={order} id={order._id} />
+                );
+              })
+            ) : (
+              <div>There are no todos for you!</div>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-wrap">
-          <h2 className="w-24">CNCs to post to another store</h2>
+          <h2 className="w-1/4">CNCs to post to another store</h2>
           {postingCncs.length > 1 ? (
             postingCncs.map((order) => {
               return <RequestCard store={store} order={order} id={order._id} />;
@@ -107,7 +111,7 @@ export const StoreView = () => {
         </div>
 
         <div className="flex flex-wrap">
-          <h2 className="w-24">CNCs incoming to your store</h2>
+          <h2 className="w-1/4">CNCs incoming to your store</h2>
           {incomingOrders.length > 1 ? (
             incomingOrders.map((order) => {
               return (
@@ -119,7 +123,7 @@ export const StoreView = () => {
           )}
         </div>
         <div className="flex">
-          <h2 className="w-24">Problem CNCs</h2>
+          <h2 className="w-1/4">Problem CNCs</h2>
           {problemOrders.length > 1 ? (
             problemOrders.map((order) => {
               return <RequestCard store={store} order={order} id={order._id} />;
@@ -129,7 +133,7 @@ export const StoreView = () => {
           )}
         </div>
         <div className="flex flex-wrap">
-          <h2 className="w-24">Awaiting collection</h2>
+          <h2 className="w-1/4">Awaiting collection</h2>
           {awaitingCollectionOrders.length > 1 ? (
             awaitingCollectionOrders.map((order) => {
               return <RequestCard store={store} order={order} id={order._id} />;
