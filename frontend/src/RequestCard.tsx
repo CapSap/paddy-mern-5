@@ -18,10 +18,10 @@ export const RequestCard = ({
   }
   return (
     <div
-      className="flex basis-96 flex-shrink-0 grow border-cyan-100 border-8 m-3 p-3"
+      className=" basis-96 flex-shrink-0 grow border-cyan-100 border-8 m-3 p-3"
       id={id}
     >
-      <div>
+      <div className="border-red-300 border-2">
         <p>Order Number / reference: {order.orderNumber}</p>
         <p>
           Name: <span>{order.customerName}</span>
@@ -33,7 +33,7 @@ export const RequestCard = ({
 
         <a href="#">Link to magento order</a>
       </div>
-      <div className="flex-grow  text-center">
+      <div className="flex-grow  text-center border-teal-400 border-2">
         <p>Requests:</p>
         {order.orderedItems
           .filter((request) => request.sendingStore === store)
