@@ -17,29 +17,45 @@ export const RequestCardFulll = ({
     return <div>no order</div>;
   }
   return (
-    <div
-      className="flex basis-96 flex-shrink-0 grow border-cyan-100 border-8 m-3 p-3"
-      id={id}
-    >
-      <div>
-        <p>Order Number / reference: {order.orderNumber}</p>
-        <p>
-          Name: <span>{order.customerName}</span>
-        </p>
-        {order.notes ? <p>Notes: {order.notes}</p> : null}
-        <p className="">Destination Store: {order.pickupLocation}</p>
-        <p>Status: {order.orderedItems[0].requestStatus}</p>
-        <p>Number of requests: {order.orderedItems.length}</p>
+    <div className="border-cyan-100 border-2 m-3 p-3 rounded-xl" id={id}>
+      <div className="mb-16 pl-4">
+        <div className="pb-2">
+          <p className="text-slate-600 text-sm">Reference / Order #:</p>
+          <p>{order.orderNumber}</p>
+        </div>
+        <div className="pb-2">
+          <p className="text-slate-600 text-sm">Name:</p>
+          <p>{order.customerName}</p>
+        </div>
 
-        <a href="#" className="font-bold">
+        {order.notes ? (
+          <div className="pb-2">
+            <p className="text-slate-600 text-sm">Notes: </p>
+            <p>{order.notes}</p>
+          </div>
+        ) : null}
+        <div className="pb-2">
+          <p className="text-slate-600 text-sm">Destination Store: </p>
+          <p className="font-bold">{order.pickupLocation}</p>
+        </div>
+        <div className="pb-2">
+          <p className="text-slate-600 text-sm">Status </p>
+
+          <p>{order.orderedItems[0].requestStatus}</p>
+        </div>
+        <div className="pb-2">
+          <p className="text-slate-600 text-sm">Number of requests: </p>
+          <p> {order.orderedItems.length}</p>
+        </div>
+        <a className="text-red-900" href="#">
           Link to magento order
         </a>
       </div>
-      <div className="flex-grow  text-center">
-        <p>Requests:</p>
+      <div className="">
+        <p className="pl-2">Requests</p>
         {order.orderedItems.map((request) => {
           return (
-            <div className="m-2 border-2 p-4">
+            <div className="m-2 p-4 border-2 rounded-xl">
               <p>Sending store: {request.sendingStore}</p>
               <p>Items: {request.items}</p>
               <p>Status: {request.requestStatus}</p>
