@@ -17,7 +17,7 @@ export const RequestCard = ({
     return <div>no order</div>;
   }
   return (
-    <div className="border-cyan-100 border-2 m-3 p-3 rounded-xl" id={id}>
+    <div className="border-indigo-100 border-2 m-3 p-3 rounded-xl" id={id}>
       <div className="mb-16 pl-4">
         <div className="pb-2">
           <p className="text-slate-600 text-sm">Reference / Order #:</p>
