@@ -112,15 +112,21 @@ export const StoreView = () => {
 
         <div className="flex flex-wrap">
           <h2 className="w-1/4">CNCs incoming to your store</h2>
-          {incomingOrders.length > 1 ? (
-            incomingOrders.map((order) => {
-              return (
-                <RequestCardFulll store={store} order={order} id={order._id} />
-              );
-            })
-          ) : (
-            <div>No orders incoming</div>
-          )}
+          <div className="w-3/4 grid grid-cols-3">
+            {incomingOrders.length > 1 ? (
+              incomingOrders.map((order) => {
+                return (
+                  <RequestCardFulll
+                    store={store}
+                    order={order}
+                    id={order._id}
+                  />
+                );
+              })
+            ) : (
+              <div>No orders incoming</div>
+            )}
+          </div>
         </div>
         <div className="flex">
           <h2 className="w-1/4">Problem CNCs</h2>
