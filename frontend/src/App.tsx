@@ -1,10 +1,11 @@
 import { createRoot } from "react-dom/client";
 import { Entry } from "./Entry";
+import { StoreView } from "./StoreView";
 
 const App = () => {
   return (
     <div>
-      app hello
+      <StoreView />
       <Entry />
     </div>
   );
