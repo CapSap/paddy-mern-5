@@ -30,10 +30,11 @@ export type Order = {
 export type OrderInfoFromDB = Order & { _id: string };
 
 export type Request = {
-  sendingStore?: StoreLocation;
+  sendingStore: StoreLocation | undefined;
   requestStatus: string | undefined;
-  items?: string;
-  tracking: string;
+  items: string | undefined;
+  tracking: string | undefined;
+  ibt: string | undefined;
   requestCommentHistory?: [
     {
       author: string;

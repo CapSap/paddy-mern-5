@@ -11,9 +11,11 @@ export const Entry = () => {
 
   const [orderedItems, setOrderedItems] = useState<Request[]>([
     {
-      items: "",
+      items: undefined,
       sendingStore: undefined,
       requestStatus: "created",
+      tracking: undefined,
+      ibt: undefined,
     },
   ]);
 
@@ -21,7 +23,13 @@ export const Entry = () => {
     setOrderedItems((prevState) => {
       return [
         ...prevState,
-        { items: "", sendingStore: undefined, requestStatus: "created" },
+        {
+          items: undefined,
+          sendingStore: undefined,
+          requestStatus: "created",
+          tracking: undefined,
+          ibt: undefined,
+        },
       ];
     });
   }
