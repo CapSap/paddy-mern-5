@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { RequestCard } from "./RequestCard";
-import { Order, OrderInfoFromDB, StoreLocation } from "./Types";
+import { Order, OrderInfoFromDB, StoreLocation } from "../Types";
 import { RequestCardFulll } from "./RequestCardFull";
 
 export const StoreView = () => {

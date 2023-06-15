@@ -1,6 +1,6 @@
 import { createRoot } from "react-dom/client";
-import { Entry } from "./Entry";
-import { StoreView } from "./StoreView";
+import { Entry } from "./components/Entry";
+import { StoreView } from "./components/StoreView";
 
 const App = () => {
   return (

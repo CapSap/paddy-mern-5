@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from "react";
-import { StoreLocation, Request, Order } from "./Types";
+import { StoreLocation, Request, Order } from "../Types";
 
 export const Entry = () => {
   const [orderNumber, setOrderNumber] = useState<string>();
