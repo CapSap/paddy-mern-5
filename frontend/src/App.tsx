@@ -1,12 +1,14 @@
 import { createRoot } from "react-dom/client";
-import { Entry } from "./Entry";
-import { StoreView } from "./StoreView";
+import { Entry } from "./components/Entry";
+import { StoreView } from "./components/StoreView";
+import { EcommView } from "./components/EcommView";
 
 const App = () => {
   return (
     <div>
-      <StoreView />
-      <Entry />
+      <EcommView />
+      {/* <StoreView /> */}
+      {/* <Entry /> */}
     </div>
   );
 };

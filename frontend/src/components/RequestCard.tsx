@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OrderInfoFromDB, StoreLocation } from "./Types";
+import { OrderInfoFromDB, StoreLocation } from "../Types";
 
 export const RequestCard = ({
   order,

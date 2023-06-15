@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RequestCard } from "./RequestCard";
-import { Order, OrderInfoFromDB, StoreLocation } from "./Types";
-import { RequestCardFulll } from "./RequestCardFull";
+import { Order, OrderInfoFromDB, StoreLocation } from "../Types";
+import { RequestCardFull } from "./RequestCardFull";
 
 export const StoreView = () => {
   const [allOrders, setAllOrders] = useState<OrderInfoFromDB[]>();
@@ -131,11 +131,7 @@ export const StoreView = () => {
             {incomingOrders.length > 1 ? (
               incomingOrders.map((order) => {
                 return (
-                  <RequestCardFulll
-                    store={store}
-                    order={order}
-                    id={order._id}
-                  />
+                  <RequestCardFull store={store} order={order} id={order._id} />
                 );
               })
             ) : (

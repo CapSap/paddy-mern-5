@@ -1,18 +1,13 @@
 import { useState } from "react";
-import { OrderInfoFromDB, StoreLocation } from "./Types";
+import { OrderInfoFromDB, StoreLocation } from "../Types";
 
-export const RequestCardFulll = ({
+export const EcommCard = ({
   order,
   id,
-  store,
 }: {
   order: OrderInfoFromDB;
   id: string;
-  store: StoreLocation;
 }) => {
-  const [tracking, setTracking] = useState<string>();
-  const [ibt, setIBT] = useState<string>();
-
   if (!order) {
     return <div>no order</div>;
   }
@@ -56,10 +51,32 @@ export const RequestCardFulll = ({
         {order.orderedItems.map((request) => {
           return (
             <div className="m-2 p-4 border-2 rounded-xl">
-              <p>Sending store: {request.sendingStore}</p>
-              <p>Items: {request.items}</p>
-              <p>Status: {request.requestStatus}</p>
-              {request.tracking ? <p>Tracking: {request.tracking}</p> : null}
+              <div className="pb-2">
+                <p className="text-slate-600 text-sm">
+                  Sending store:{" "}
+                  <p className="text-base text-black">{request.sendingStore}</p>
+                </p>
+              </div>
+              <div className="pb-2">
+                <p className="text-slate-600 text-sm">Items: </p>
+                <p>{request.items}</p>
+              </div>
+              <div className="pb-2">
+                <p className="text-slate-600 text-sm">Status </p>
+                <p> {request.requestStatus}</p>
+              </div>
+              {request.tracking ? (
+                <div className="pb-2">
+                  <p className="text-slate-600 text-sm">Tracking </p>
+                  <p> {request.tracking}</p>
+                </div>
+              ) : null}
+              {request.ibt ? (
+                <div className="pb-2">
+                  <p className="text-slate-600 text-sm">IBT</p>
+                  <p> {request.ibt}</p>
+                </div>
+              ) : null}
             </div>
           );
         })}

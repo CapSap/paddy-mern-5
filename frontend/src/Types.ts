@@ -35,6 +35,7 @@ export type Request = {
   items: string | undefined;
   tracking: string | undefined;
   ibt: string | undefined;
+  isIbtAccepeted: boolean;
   requestCommentHistory?: [
     {
       author: string;
