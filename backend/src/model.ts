@@ -15,7 +15,7 @@ export interface Order {
   orderNumber: string;
   customerName: string;
   pickupLocation: StoreLocation;
-  orderedItems: request[];
+  orderedItems: Request[];
   isFourHour: boolean;
   notes: string;
   isArchived: boolean;
@@ -30,8 +30,8 @@ export interface Order {
   ];
 }
 
-interface request {
-  sendingStore?: StoreLocation;
+interface Request {
+  sendingStore: StoreLocation;
   requestStatus: string | undefined;
   items?: string;
   tracking: string;
