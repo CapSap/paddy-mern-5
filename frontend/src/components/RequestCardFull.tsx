@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { OrderInfoFromDB, StoreLocation } from "../Types";
 
-export const RequestCardFulll = ({
+export const RequestCardFull = ({
   order,
   id,
   store,
