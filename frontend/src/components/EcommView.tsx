@@ -60,9 +60,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {pendingOrders.length > 1 ? (
             pendingOrders.map((order) => {
-              return (
-                <RequestCardFull store={store} order={order} id={order._id} />
-              );
+              return <EcommCard order={order} id={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>
@@ -76,9 +74,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {ibtReadyOrders.length > 1 ? (
             ibtReadyOrders.map((order) => {
-              return (
-                <RequestCardFull store={store} order={order} id={order._id} />
-              );
+              return <EcommCard order={order} id={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>
@@ -90,9 +86,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {allOrders.length > 1 ? (
             allOrders.map((order) => {
-              return (
-                <RequestCardFull store={store} order={order} id={order._id} />
-              );
+              return <EcommCard order={order} id={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>

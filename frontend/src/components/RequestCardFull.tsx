@@ -56,10 +56,32 @@ export const RequestCardFull = ({
         {order.orderedItems.map((request) => {
           return (
             <div className="m-2 p-4 border-2 rounded-xl">
-              <p>Sending store: {request.sendingStore}</p>
-              <p>Items: {request.items}</p>
-              <p>Status: {request.requestStatus}</p>
-              {request.tracking ? <p>Tracking: {request.tracking}</p> : null}
+              <div className="pb-2">
+                <p className="text-slate-600 text-sm">
+                  Sending store:{" "}
+                  <p className="text-base text-black">{request.sendingStore}</p>
+                </p>
+              </div>
+              <div className="pb-2">
+                <p className="text-slate-600 text-sm">Items: </p>
+                <p>{request.items}</p>
+              </div>
+              <div className="pb-2">
+                <p className="text-slate-600 text-sm">Status </p>
+                <p> {request.requestStatus}</p>
+              </div>
+              {request.tracking ? (
+                <div className="pb-2">
+                  <p className="text-slate-600 text-sm">Tracking </p>
+                  <p> {request.tracking}</p>
+                </div>
+              ) : null}
+              {request.ibt ? (
+                <div className="pb-2">
+                  <p className="text-slate-600 text-sm">IBT</p>
+                  <p> {request.ibt}</p>
+                </div>
+              ) : null}
             </div>
           );
         })}
