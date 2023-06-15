@@ -37,7 +37,18 @@ export const StoreView = () => {
   });
 
   const incomingOrders = allOrders.filter((order) => {
-    return order.pickupLocation === store;
+    const result = order.orderedItems.every((req) => {
+      console.log(req.sendingStore, store);
+
+      return req.sendingStore === store;
+    });
+    console.log(result);
+
+    return (
+      // dont return orders where the entire order is being requested from { store }
+      !order.orderedItems.every((request) => request.sendingStore === store) &&
+      order.pickupLocation === store
+    );
   });
 
   const problemOrders = allOrders.filter((order) => {
