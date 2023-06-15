@@ -35,6 +35,7 @@ interface Request {
   requestStatus: string | undefined;
   items?: string;
   tracking: string;
+  isIbtAccepeted: boolean;
   requestCommentHistory?: [
     {
       author: string;
