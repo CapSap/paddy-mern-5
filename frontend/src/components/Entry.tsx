@@ -16,6 +16,7 @@ export const Entry = () => {
       requestStatus: "created",
       tracking: undefined,
       ibt: undefined,
+      isIbtAccepeted: false,
     },
   ]);
 
@@ -29,6 +30,7 @@ export const Entry = () => {
           requestStatus: "created",
           tracking: undefined,
           ibt: undefined,
+          isIbtAccepeted: false,
         },
       ];
     });
