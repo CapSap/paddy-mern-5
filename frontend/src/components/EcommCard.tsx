@@ -55,10 +55,8 @@ export const EcommCard = ({
               key={order._id + index}
             >
               <div className="pb-2">
-                <p className="text-slate-600 text-sm">
-                  Sending store:{" "}
-                  <p className="text-base text-black">{request.sendingStore}</p>
-                </p>
+                <p className="text-slate-600 text-sm">Sending store: </p>
+                <p className="text-base text-black">{request.sendingStore}</p>
               </div>
               <div className="pb-2">
                 <p className="text-slate-600 text-sm">Items: </p>
