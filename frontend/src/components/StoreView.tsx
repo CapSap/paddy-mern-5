@@ -77,9 +77,10 @@ export const StoreView = () => {
           onChange={(e) => {
             setStore(e.target.value as StoreLocation);
           }}
+          defaultValue={"default"}
           className="bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
         >
-          <option selected={true} disabled={true} value={undefined}>
+          <option disabled={true} value={"default"}>
             Please select a store
           </option>
 
