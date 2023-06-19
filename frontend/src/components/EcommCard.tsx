@@ -48,9 +48,12 @@ export const EcommCard = ({
       </div>
       <div className="">
         <p className="pl-2">Requests</p>
-        {order.orderedItems.map((request) => {
+        {order.orderedItems.map((request, index) => {
           return (
-            <div className="m-2 p-4 border-2 rounded-xl">
+            <div
+              className="m-2 p-4 border-2 rounded-xl"
+              key={order._id + index}
+            >
               <div className="pb-2">
                 <p className="text-slate-600 text-sm">
                   Sending store:{" "}
