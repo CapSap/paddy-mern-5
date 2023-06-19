@@ -55,9 +55,12 @@ export const RequestCard = ({
         <p className="pl-2">Todos</p>
         {order.orderedItems
           .filter((request) => request.sendingStore === store)
-          .map((request) => {
+          .map((request, index) => {
             return (
-              <div className="m-2 p-4 border-2 rounded-xl">
+              <div
+                className="m-2 p-4 border-2 rounded-xl"
+                key={order._id + index}
+              >
                 <div className="pb-2">
                   <p className="text-slate-600 text-sm">
                     Sending store:{" "}

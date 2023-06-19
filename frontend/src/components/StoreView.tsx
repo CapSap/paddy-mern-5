@@ -77,9 +77,10 @@ export const StoreView = () => {
           onChange={(e) => {
             setStore(e.target.value as StoreLocation);
           }}
+          defaultValue={"default"}
           className="bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
         >
-          <option selected={true} disabled={true} value={undefined}>
+          <option disabled={true} value={"default"}>
             Please select a store
           </option>
 
@@ -101,7 +102,12 @@ export const StoreView = () => {
             {simpleCncs.length > 0 ? (
               simpleCncs.map((order) => {
                 return (
-                  <RequestCard store={store} order={order} id={order._id} />
+                  <RequestCard
+                    store={store}
+                    order={order}
+                    id={order._id}
+                    key={order._id}
+                  />
                 );
               })
             ) : (
@@ -116,7 +122,14 @@ export const StoreView = () => {
           </h2>
           {postingCncs.length > 0 ? (
             postingCncs.map((order) => {
-              return <RequestCard store={store} order={order} id={order._id} />;
+              return (
+                <RequestCard
+                  store={store}
+                  order={order}
+                  id={order._id}
+                  key={order._id}
+                />
+              );
             })
           ) : (
             <div>There are no cns for you to post out!</div>
@@ -131,7 +144,12 @@ export const StoreView = () => {
             {incomingOrders.length > 0 ? (
               incomingOrders.map((order) => {
                 return (
-                  <RequestCardFull store={store} order={order} id={order._id} />
+                  <RequestCardFull
+                    store={store}
+                    order={order}
+                    id={order._id}
+                    key={order._id}
+                  />
                 );
               })
             ) : (
@@ -143,7 +161,14 @@ export const StoreView = () => {
           <h2 className="w-1/4">Problem CNCs ({problemOrders.length})</h2>
           {problemOrders.length > 0 ? (
             problemOrders.map((order) => {
-              return <RequestCard store={store} order={order} id={order._id} />;
+              return (
+                <RequestCard
+                  store={store}
+                  order={order}
+                  id={order._id}
+                  key={order._id}
+                />
+              );
             })
           ) : (
             <div>No orders with problems</div>
@@ -155,7 +180,14 @@ export const StoreView = () => {
           </h2>
           {awaitingCollectionOrders.length > 0 ? (
             awaitingCollectionOrders.map((order) => {
-              return <RequestCard store={store} order={order} id={order._id} />;
+              return (
+                <RequestCard
+                  store={store}
+                  order={order}
+                  id={order._id}
+                  key={order._id}
+                />
+              );
             })
           ) : (
             <div>

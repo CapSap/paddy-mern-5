@@ -45,7 +45,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {problemOrders.length > 0 ? (
             problemOrders.map((order) => {
-              return <EcommCard order={order} id={order._id} />;
+              return <EcommCard order={order} id={order._id} key={order._id} />;
             })
           ) : (
             <div>There are no problem CNCs!</div>
@@ -57,7 +57,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {pendingOrders.length > 0 ? (
             pendingOrders.map((order) => {
-              return <EcommCard order={order} id={order._id} />;
+              return <EcommCard order={order} id={order._id} key={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>
@@ -71,7 +71,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {ibtReadyOrders.length > 0 ? (
             ibtReadyOrders.map((order) => {
-              return <EcommCard order={order} id={order._id} />;
+              return <EcommCard order={order} id={order._id} key={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>
@@ -83,7 +83,7 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {allOrders.length > 0 ? (
             allOrders.map((order) => {
-              return <EcommCard order={order} id={order._id} />;
+              return <EcommCard order={order} id={order._id} key={order._id} />;
             })
           ) : (
             <div>There are no todos for you!</div>
