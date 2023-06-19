@@ -98,7 +98,7 @@ export const StoreView = () => {
         <div className="flex">
           <h2 className="w-1/4">CNCs for your store ({simpleCncs.length})</h2>
           <div className="w-3/4 grid grid-cols-3">
-            {simpleCncs.length > 1 ? (
+            {simpleCncs.length > 0 ? (
               simpleCncs.map((order) => {
                 return (
                   <RequestCard store={store} order={order} id={order._id} />
@@ -114,7 +114,7 @@ export const StoreView = () => {
           <h2 className="w-1/4">
             CNCs to post to another store ({postingCncs.length})
           </h2>
-          {postingCncs.length > 1 ? (
+          {postingCncs.length > 0 ? (
             postingCncs.map((order) => {
               return <RequestCard store={store} order={order} id={order._id} />;
             })
@@ -128,7 +128,7 @@ export const StoreView = () => {
             CNCs incoming to your store ({incomingOrders.length})
           </h2>
           <div className="w-3/4 grid grid-cols-3">
-            {incomingOrders.length > 1 ? (
+            {incomingOrders.length > 0 ? (
               incomingOrders.map((order) => {
                 return (
                   <RequestCardFull store={store} order={order} id={order._id} />
@@ -141,7 +141,7 @@ export const StoreView = () => {
         </div>
         <div className="flex">
           <h2 className="w-1/4">Problem CNCs ({problemOrders.length})</h2>
-          {problemOrders.length > 1 ? (
+          {problemOrders.length > 0 ? (
             problemOrders.map((order) => {
               return <RequestCard store={store} order={order} id={order._id} />;
             })
@@ -153,7 +153,7 @@ export const StoreView = () => {
           <h2 className="w-1/4">
             Awaiting collection ({awaitingCollectionOrders.length})
           </h2>
-          {awaitingCollectionOrders.length > 1 ? (
+          {awaitingCollectionOrders.length > 0 ? (
             awaitingCollectionOrders.map((order) => {
               return <RequestCard store={store} order={order} id={order._id} />;
             })

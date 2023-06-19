@@ -46,7 +46,7 @@ interface Request {
   ];
 }
 
-const orderSchema = new mongoose.Schema(
+const orderSchema = new mongoose.Schema<Order>(
   {
     orderNumber: {
       type: String,
@@ -74,6 +74,7 @@ const orderSchema = new mongoose.Schema(
         tracking: { type: String, default: null },
         message: { type: String, default: null },
         requestStatus: { type: String, default: "created" },
+        isIbtAccepeted: { type: Boolean, default: false },
       },
     ],
     isFourHour: {
