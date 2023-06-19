@@ -246,12 +246,7 @@ export const Entry = () => {
           <p className="max-w-screen-md md:col-span-2 text-gray-500 md:text-lg text-center mx-auto">
             Make a request for each sku on the order
           </p>
-          <button
-            className="md:col-span-2 inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
-            type="submit"
-          >
-            Send order/request to store
-          </button>
+
           {orderedItems.map((request, index) => {
             return (
               <div>
@@ -316,7 +311,7 @@ export const Entry = () => {
               type="submit"
               className="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
             >
-              Submit
+              Submit order/request to store
             </button>
           </div>
         </form>
