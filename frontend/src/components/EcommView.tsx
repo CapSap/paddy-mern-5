@@ -21,7 +21,6 @@ export const EcommView = () => {
     return <div>fetching data...</div>;
   }
 
-  // simple cncs are where the collection store and sending store (store providing stock is the same)
   const problemOrders = allOrders.filter((order) => {
     return order.hasIssue;
   });
@@ -31,14 +30,12 @@ export const EcommView = () => {
   });
 
   const ibtReadyOrders = allOrders.filter((order) => {
-    return order.orderedItems.some((request) => !request.isIbtAccepeted);
+    return order.orderedItems.some(
+      (request) => request.ibt && !request.isIbtAccepeted
+    );
   });
 
-  console.log(allOrders);
-
-  const awaitingCollectionOrders = allOrders.filter((order) => {
-    return order.orderedItems[0].requestStatus === "ready for pickup";
-  });
+  console.log(ibtReadyOrders);
 
   return (
     <div>
@@ -46,7 +43,7 @@ export const EcommView = () => {
       <div className="flex">
         <h2 className="w-1/4">Problem CNCs ({problemOrders.length})</h2>
         <div className="w-3/4 grid grid-cols-3">
-          {problemOrders.length > 1 ? (
+          {problemOrders.length > 0 ? (
             problemOrders.map((order) => {
               return <EcommCard order={order} id={order._id} />;
             })
@@ -58,7 +55,7 @@ export const EcommView = () => {
       <div className="flex">
         <h2 className="w-1/4">Pending CNCs ({pendingOrders.length})</h2>
         <div className="w-3/4 grid grid-cols-3">
-          {pendingOrders.length > 1 ? (
+          {pendingOrders.length > 0 ? (
             pendingOrders.map((order) => {
               return <EcommCard order={order} id={order._id} />;
             })
@@ -72,7 +69,7 @@ export const EcommView = () => {
           IBT ready for accept CNCs ({ibtReadyOrders.length})
         </h2>
         <div className="w-3/4 grid grid-cols-3">
-          {ibtReadyOrders.length > 1 ? (
+          {ibtReadyOrders.length > 0 ? (
             ibtReadyOrders.map((order) => {
               return <EcommCard order={order} id={order._id} />;
             })
@@ -84,7 +81,7 @@ export const EcommView = () => {
       <div className="flex">
         <h2 className="w-1/4">All CNCs ({allOrders.length})</h2>
         <div className="w-3/4 grid grid-cols-3">
-          {allOrders.length > 1 ? (
+          {allOrders.length > 0 ? (
             allOrders.map((order) => {
               return <EcommCard order={order} id={order._id} />;
             })
