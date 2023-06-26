@@ -16,6 +16,12 @@ export const RequestCard = ({
   if (!order) {
     return <div>no order</div>;
   }
+
+  function handleUpdate(request) {
+    console.log(tracking, ibt, request);
+    //
+  }
+
   return (
     <div className="border-indigo-100 border-2 m-3 p-3 rounded-xl" id={id}>
       <div className="mb-16 pl-4">
@@ -62,12 +68,9 @@ export const RequestCard = ({
                 key={order._id + index}
               >
                 <div className="pb-2">
-                  <p className="text-slate-600 text-sm">
-                    Sending store:{" "}
-                    <p className="text-base text-black">
-                      {request.sendingStore}
-                    </p>
-                  </p>
+                  <p className="text-slate-600 text-sm">Sending store: </p>
+
+                  <p className="text-base text-black">{request.sendingStore}</p>
                 </div>
                 <div className="pb-2">
                   <p className="text-slate-600 text-sm">Items: </p>
@@ -111,7 +114,10 @@ export const RequestCard = ({
                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   />
                 </div>
-                <button className="mt-4 w-full inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
+                <button
+                  className="mt-4 w-full inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                  onClick={() => handleUpdate(request)}
+                >
                   Update
                 </button>
               </div>
