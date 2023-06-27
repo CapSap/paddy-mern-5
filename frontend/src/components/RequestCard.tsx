@@ -10,8 +10,8 @@ export const RequestCard = ({
   id: string;
   store: StoreLocation;
 }) => {
-  const [tracking, setTracking] = useState<string>();
-  const [ibt, setIBT] = useState<string>();
+  const [tracking, setTracking] = useState<string>("");
+  const [ibt, setIBT] = useState<string>("");
 
   if (!order) {
     return <div>no order</div>;
