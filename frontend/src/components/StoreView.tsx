@@ -5,7 +5,7 @@ import { RequestCardFull } from "./RequestCardFull";
 
 export const StoreView = () => {
   const [allOrders, setAllOrders] = useState<OrderInfoFromDB[]>();
-  const [store, setStore] = useState<StoreLocation>("Canberra");
+  const [store, setStore] = useState<StoreLocation>("Canberra"); // need to change this defaukt state to "". react is throwing an error right now
 
   useEffect(() => {
     getAllOrders();
