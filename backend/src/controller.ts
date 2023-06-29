@@ -46,7 +46,11 @@ export const deleteAll =
 export const updateOne =
   (model: Model<Order>) => async (req: Request, res: Response) => {
     try {
-      const doc = await model.findById({ _id: req.params.id });
+      const doc = await model.findByIdAndUpdate(
+        { _id: req.params.id },
+        { ...req.body },
+        { new: true }
+      );
 
       if (!doc) {
         return res.status(400).json().end();
