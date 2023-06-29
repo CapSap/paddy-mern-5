@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
-import { Entry } from "./components/Entry";
-import { StoreView } from "./components/StoreView";
-import { EcommView } from "./components/EcommView";
+import { Entry } from "./src/components/Entry";
+import { StoreView } from "./src/components/StoreView";
+import { EcommView } from "./src/components/EcommView";
 
 const App = () => {
   return (
