@@ -6,8 +6,8 @@ import { EcommView } from "./components/EcommView";
 const App = () => {
   return (
     <div>
-      <EcommView />
-      {/* <StoreView /> */}
+      {/* <EcommView /> */}
+      <StoreView />
       {/* <Entry /> */}
     </div>
   );
