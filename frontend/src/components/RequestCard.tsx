@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OrderInfoFromDB, StoreLocation } from "../Types";
+import { OrderInfoFromDB, RequestFromDB, StoreLocation } from "../Types";
 
 export const RequestCard = ({
   order,
@@ -17,9 +17,28 @@ export const RequestCard = ({
     return <div>no order</div>;
   }
 
-  function handleUpdate(request) {
-    console.log(tracking, ibt, request);
-    //
+  async function handleUpdate(request: RequestFromDB) {
+    const newRequest = {
+      ...request,
+      tracking: tracking,
+      ibt: ibt,
+    };
+    const newOrder = {
+      ...order,
+      orderedItems: [
+        ...order.orderedItems.filter((req) => req._id !== request._id),
+        newRequest,
+      ],
+    };
+
+    const response = await fetch(`http://localhost:3000/orders/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+
+      body: JSON.stringify(newOrder),
+    });
+
+    console.log(await response.json());
   }
 
   return (
