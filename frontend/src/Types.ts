@@ -27,7 +27,27 @@ export type Order = {
   ];
 };
 
-export type OrderInfoFromDB = Order & { _id: string };
+export type OrderInfoFromDB = {
+  _id: string;
+  orderNumber: string;
+  customerName: string;
+  pickupLocation?: StoreLocation;
+  orderedItems: RequestFromDB[];
+  isFourHour: boolean;
+  notes?: string;
+  isArchived: boolean;
+  hasIssue: boolean;
+  orderCommentHistory?: [
+    {
+      author: string;
+      store: StoreLocation;
+      message: string;
+      dateTime: string;
+    }
+  ];
+};
+
+export type RequestFromDB = Request & { _id: string };
 
 export type Request = {
   sendingStore: StoreLocation | undefined;
