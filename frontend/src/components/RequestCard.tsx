@@ -12,6 +12,10 @@ export const RequestCard = ({
 }) => {
   const [tracking, setTracking] = useState<string>("");
   const [ibt, setIBT] = useState<string>("");
+  const [requestStatus, setRequestStatus] = useState(
+    order.orderedItems.find((request) => request.sendingStore === store)
+      ?.requestStatus
+  );
 
   if (!order) {
     return <div>no order</div>;
@@ -22,6 +26,7 @@ export const RequestCard = ({
       ...request,
       tracking: tracking,
       ibt: ibt,
+      requestStatus: requestStatus,
     };
     const newOrder = {
       ...order,
@@ -95,9 +100,29 @@ export const RequestCard = ({
                   <p className="text-slate-600 text-sm">Items: </p>
                   <p>{request.items}</p>
                 </div>
+
                 <div className="pb-2">
-                  <p className="text-slate-600 text-sm">Status </p>
-                  <p> {request.requestStatus}</p>
+                  <label
+                    className="block text-slate-600 text-sm mb-2"
+                    htmlFor="requestStatus"
+                  >
+                    Request status
+                  </label>
+                  <select
+                    required={true}
+                    id="requestStatus"
+                    value={requestStatus}
+                    onChange={(e) => {
+                      setRequestStatus(e.target.value);
+                    }}
+                    defaultValue={"not touched"}
+                    className="bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  >
+                    <option value="created">Created / Not touched </option>
+                    <option value="Printed">Printed / being picked</option>
+                    <option value="Posted">Posted</option>
+                    <option value="ready">Ready for collection</option>
+                  </select>
                 </div>
                 <div className="">
                   <label
