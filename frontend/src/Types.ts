@@ -47,7 +47,23 @@ export type OrderInfoFromDB = {
   ];
 };
 
-export type RequestFromDB = Request & { _id: string };
+export type RequestFromDB = {
+  _id: string;
+  sendingStore: StoreLocation;
+  requestStatus: string;
+  items: string;
+  tracking: string | undefined;
+  ibt: string | undefined;
+  isIbtAccepeted: boolean;
+  requestCommentHistory?: [
+    {
+      author: string;
+      store: StoreLocation;
+      message: string;
+      dateTime: string;
+    }
+  ];
+};
 
 export type Request = {
   sendingStore: StoreLocation | undefined;
