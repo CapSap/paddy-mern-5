@@ -68,11 +68,7 @@ export const RequestCard = ({
           <p className="text-slate-600 text-sm">Destination Store: </p>
           <p className="font-bold">{order.pickupLocation}</p>
         </div>
-        <div className="pb-2">
-          <p className="text-slate-600 text-sm">Status </p>
 
-          <p>{order.orderedItems[0].requestStatus}</p>
-        </div>
         <div className="pb-2">
           <p className="text-slate-600 text-sm">Number of requests: </p>
           <p> {order.orderedItems.length}</p>
