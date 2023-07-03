@@ -36,6 +36,7 @@ interface Request {
   items?: string;
   tracking: string;
   isIbtAccepeted: boolean;
+  requestNotes: string;
   requestCommentHistory?: [
     {
       author: string;
@@ -75,6 +76,7 @@ const orderSchema = new mongoose.Schema<Order>(
         message: { type: String, default: null },
         requestStatus: { type: String, default: "created" },
         isIbtAccepeted: { type: Boolean, default: false },
+        requestNotes: { type: String, default: null },
       },
     ],
     isFourHour: {
