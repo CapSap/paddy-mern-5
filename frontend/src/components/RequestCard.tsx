@@ -126,8 +126,8 @@ export const RequestCard = ({
                     className="bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   >
                     <option value="created">Created / Not touched </option>
-                    <option value="Printed">Printed / being picked</option>
-                    <option value="Posted">Posted</option>
+                    <option value="printed">Printed / being picked</option>
+                    <option value="posted">Posted</option>
                     <option value="ready">Ready for collection</option>
                     <option value="problem">Problem </option>
                   </select>
