@@ -22,7 +22,10 @@ export const RequestCard = ({
       ?.requestStatus
   );
 
-  const [requestNotes, setRequestNotes] = useState();
+  const [requestNotes, setRequestNotes] = useState(
+    order.orderedItems.find((request) => request.sendingStore === store)
+      ?.requestNotes
+  );
 
   if (!order) {
     return <div>no order</div>;
@@ -34,6 +37,7 @@ export const RequestCard = ({
       tracking: tracking,
       ibt: ibt,
       requestStatus: requestStatus,
+      requestNotes: requestNotes,
     };
     const newOrder = {
       ...order,
