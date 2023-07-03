@@ -55,6 +55,7 @@ export type RequestFromDB = {
   tracking: string | undefined;
   ibt: string | undefined;
   isIbtAccepeted: boolean;
+  requestNotes: string;
   requestCommentHistory?: [
     {
       author: string;
