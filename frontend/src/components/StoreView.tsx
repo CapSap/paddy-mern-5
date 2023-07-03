@@ -25,14 +25,22 @@ export const StoreView = () => {
   const simpleCncs = allOrders.filter((order) => {
     return (
       order.pickupLocation === store &&
-      order.orderedItems.some((request) => request.sendingStore === store)
+      order.orderedItems.some(
+        (request) =>
+          request.sendingStore === store &&
+          request.requestStatus !== "posted" &&
+          request.requestStatus !== "ready"
+      )
     );
   });
 
   const postingCncs = allOrders.filter((order) => {
     return (
       order.pickupLocation !== store &&
-      order.orderedItems.some((request) => request.sendingStore === store)
+      order.orderedItems.some(
+        (request) =>
+          request.sendingStore === store && request.requestStatus !== "posted"
+      )
     );
   });
 
