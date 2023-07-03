@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { OrderInfoFromDB, StoreLocation } from "../Types";
+import { OrderInfoFromDB, RequestFromDB, StoreLocation } from "../Types";
 
 export const RequestCard = ({
   order,
@@ -10,12 +10,53 @@ export const RequestCard = ({
   id: string;
   store: StoreLocation;
 }) => {
-  const [tracking, setTracking] = useState<string>();
-  const [ibt, setIBT] = useState<string>();
+  const [tracking, setTracking] = useState(
+    order.orderedItems.find((request) => request.sendingStore === store)
+      ?.tracking
+  );
+  const [ibt, setIBT] = useState(
+    order.orderedItems.find((request) => request.sendingStore === store)?.ibt
+  );
+  const [requestStatus, setRequestStatus] = useState(
+    order.orderedItems.find((request) => request.sendingStore === store)
+      ?.requestStatus
+  );
+
+  const [requestNotes, setRequestNotes] = useState(
+    order.orderedItems.find((request) => request.sendingStore === store)
+      ?.requestNotes
+  );
 
   if (!order) {
     return <div>no order</div>;
   }
+
+  async function handleUpdate(request: RequestFromDB) {
+    const newRequest = {
+      ...request,
+      tracking: tracking,
+      ibt: ibt,
+      requestStatus: requestStatus,
+      requestNotes: requestNotes,
+    };
+    const newOrder = {
+      ...order,
+      orderedItems: [
+        ...order.orderedItems.filter((req) => req._id !== request._id),
+        newRequest,
+      ],
+    };
+
+    const response = await fetch(`http://localhost:3000/orders/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+
+      body: JSON.stringify(newOrder),
+    });
+
+    console.log(await response.json());
+  }
+
   return (
     <div className="border-indigo-100 border-2 m-3 p-3 rounded-xl" id={id}>
       <div className="mb-16 pl-4">
@@ -38,11 +79,7 @@ export const RequestCard = ({
           <p className="text-slate-600 text-sm">Destination Store: </p>
           <p className="font-bold">{order.pickupLocation}</p>
         </div>
-        <div className="pb-2">
-          <p className="text-slate-600 text-sm">Status </p>
 
-          <p>{order.orderedItems[0].requestStatus}</p>
-        </div>
         <div className="pb-2">
           <p className="text-slate-600 text-sm">Number of requests: </p>
           <p> {order.orderedItems.length}</p>
@@ -62,20 +99,38 @@ export const RequestCard = ({
                 key={order._id + index}
               >
                 <div className="pb-2">
-                  <p className="text-slate-600 text-sm">
-                    Sending store:{" "}
-                    <p className="text-base text-black">
-                      {request.sendingStore}
-                    </p>
-                  </p>
+                  <p className="text-slate-600 text-sm">Sending store: </p>
+
+                  <p className="text-base text-black">{request.sendingStore}</p>
                 </div>
                 <div className="pb-2">
                   <p className="text-slate-600 text-sm">Items: </p>
                   <p>{request.items}</p>
                 </div>
+
                 <div className="pb-2">
-                  <p className="text-slate-600 text-sm">Status </p>
-                  <p> {request.requestStatus}</p>
+                  <label
+                    className="block text-slate-600 text-sm mb-2"
+                    htmlFor="requestStatus"
+                  >
+                    Request status
+                  </label>
+                  <select
+                    required={true}
+                    id="requestStatus"
+                    value={requestStatus}
+                    onChange={(e) => {
+                      setRequestStatus(e.target.value);
+                    }}
+                    defaultValue={"not touched"}
+                    className="bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  >
+                    <option value="created">Created / Not touched </option>
+                    <option value="printed">Printed / being picked</option>
+                    <option value="posted">Posted</option>
+                    <option value="ready">Ready for collection</option>
+                    <option value="problem">Problem </option>
+                  </select>
                 </div>
                 <div className="">
                   <label
@@ -110,8 +165,27 @@ export const RequestCard = ({
                     onChange={(e) => setIBT(e.target.value)}
                     className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   />
+                  {ibt && isNaN(+ibt) ? <p>Please enter numbers only</p> : null}
                 </div>
-                <button className="mt-4 w-full inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
+                <div className="">
+                  <label
+                    htmlFor="requstNotes"
+                    className="text-gray-800 text-sm sm:text-base mb-2 pr-2 "
+                  >
+                    Notes:{" "}
+                  </label>
+                  <textarea
+                    name="requestNotes"
+                    id="requestNotes"
+                    value={requestNotes}
+                    onChange={(e) => setRequestNotes(e.target.value)}
+                    className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  />
+                </div>
+                <button
+                  className="mt-4 w-full inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                  onClick={() => handleUpdate(request)}
+                >
                   Update
                 </button>
               </div>

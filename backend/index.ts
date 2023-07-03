@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import morgan from "morgan";
-import router from "./router";
+import router from "./src/router";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { MongoClient, ServerApiVersion } from "mongodb";

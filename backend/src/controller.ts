@@ -14,7 +14,7 @@ export const createOne =
       res.status(200).json({ data: newDoc });
     } catch (e) {
       console.error(e);
-      res.status(400).end();
+      res.status(400).json({ error: e }).end();
     }
   };
 
@@ -28,7 +28,7 @@ export const getMany =
       res.status(200).json({ data: docs });
     } catch (e) {
       console.error(e);
-      res.status(400).end();
+      res.status(400).json({ error: e }).end();
     }
   };
 
@@ -39,7 +39,7 @@ export const deleteAll =
       res.send({ data: `${noOfDeletions.deletedCount} documents deleted` });
     } catch (e) {
       console.error(e);
-      res.status(400).end();
+      res.status(400).json({ error: e }).end();
     }
   };
 
@@ -48,17 +48,16 @@ export const updateOne =
     try {
       const doc = await model.findByIdAndUpdate(
         { _id: req.params.id },
-        req.body,
+        { ...req.body },
         { new: true }
       );
 
       if (!doc) {
-        return res.status(400).end();
+        return res.status(400).json().end();
       }
 
       res.status(200).json({ data: doc });
     } catch (e) {
-      console.error(e);
-      res.status(400).end();
+      res.status(400).json({ error: e }).end();
     }
   };
