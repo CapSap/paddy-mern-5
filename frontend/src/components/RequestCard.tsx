@@ -125,6 +125,7 @@ export const RequestCard = ({
                     <option value="Printed">Printed / being picked</option>
                     <option value="Posted">Posted</option>
                     <option value="ready">Ready for collection</option>
+                    <option value="problem">Problem </option>
                   </select>
                 </div>
                 <div className="">
