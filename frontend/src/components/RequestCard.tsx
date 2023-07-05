@@ -27,6 +27,12 @@ export const RequestCard = ({
       ?.requestNotes
   );
 
+  const orderConst = 1000197196;
+
+  const orderLink = `https://www.paddypallin.com.au/agpallin_20/sales/order/view/order_id/${
+    Number(order.orderNumber) - orderConst
+  }/key/5e5d3132dbf47208b4f095eddd4167b41a43f84a7a55353ef4de8fdf13fad418/`;
+
   if (!order) {
     return <div>no order</div>;
   }
@@ -84,7 +90,7 @@ export const RequestCard = ({
           <p className="text-slate-600 text-sm">Number of requests: </p>
           <p> {order.orderedItems.length}</p>
         </div>
-        <a className="text-red-900" href="#">
+        <a className="text-red-900" href={orderLink}>
           Link to magento order
         </a>
       </div>
