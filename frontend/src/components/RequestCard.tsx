@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { OrderInfoFromDB, RequestFromDB, StoreLocation } from "../Types";
 
 export const RequestCard = ({
@@ -38,7 +38,10 @@ export const RequestCard = ({
     return <div>no order</div>;
   }
 
-  async function handleUpdate(e: SubmitEvent, request: RequestFromDB) {
+  async function handleUpdate(
+    e: FormEvent<HTMLFormElement>,
+    request: RequestFromDB
+  ) {
     e.preventDefault();
     console.log(request);
     // create a new request. values are coming from state, where default state is from db.
