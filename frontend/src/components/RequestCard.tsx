@@ -153,7 +153,7 @@ export const RequestCard = ({
                       Tracking:{" "}
                     </label>
                     <input
-                      required={true}
+                      required={requestStatus === "posted"}
                       type="text"
                       name="tracking"
                       id="tracking"
@@ -170,7 +170,9 @@ export const RequestCard = ({
                       IBT:{" "}
                     </label>
                     <input
-                      required={true}
+                      required={
+                        requestStatus === "posted" || requestStatus === "ready"
+                      }
                       type="text"
                       name="ibt"
                       id="ibt"
@@ -190,7 +192,7 @@ export const RequestCard = ({
                       Notes:{" "}
                     </label>
                     <textarea
-                      required={requestStatus === "problem" ? true : false}
+                      required={requestStatus === "problem"}
                       name="requestNotes"
                       id="requestNotes"
                       value={requestNotes}
