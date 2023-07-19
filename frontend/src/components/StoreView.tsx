@@ -9,7 +9,7 @@ export const StoreView = () => {
 
   useEffect(() => {
     getAllOrders();
-  }, []);
+  }, [store]);
 
   async function getAllOrders() {
     const response = await fetch("http://localhost:3000/orders");
