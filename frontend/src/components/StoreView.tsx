@@ -115,6 +115,7 @@ export const StoreView = () => {
                     order={order}
                     id={order._id}
                     key={order._id}
+                    getAllOrders={getAllOrders}
                   />
                 );
               })
@@ -136,6 +137,7 @@ export const StoreView = () => {
                   order={order}
                   id={order._id}
                   key={order._id}
+                  getAllOrders={getAllOrders}
                 />
               );
             })
@@ -157,6 +159,7 @@ export const StoreView = () => {
                     order={order}
                     id={order._id}
                     key={order._id}
+                    getAllOrders={getAllOrders}
                   />
                 );
               })
@@ -175,6 +178,7 @@ export const StoreView = () => {
                   order={order}
                   id={order._id}
                   key={order._id}
+                  getAllOrders={getAllOrders}
                 />
               );
             })
@@ -194,6 +198,7 @@ export const StoreView = () => {
                   order={order}
                   id={order._id}
                   key={order._id}
+                  getAllOrders={getAllOrders}
                 />
               );
             })

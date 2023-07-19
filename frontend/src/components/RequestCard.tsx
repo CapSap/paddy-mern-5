@@ -5,10 +5,12 @@ export const RequestCard = ({
   order,
   id,
   store,
+  getAllOrders,
 }: {
   order: OrderInfoFromDB;
   id: string;
   store: StoreLocation;
+  getAllOrders: () => {};
 }) => {
   const [tracking, setTracking] = useState(
     order.orderedItems.find((request) => request.sendingStore === store)
@@ -67,6 +69,7 @@ export const RequestCard = ({
     });
 
     console.log(await response.json());
+    getAllOrders();
   }
 
   return (
