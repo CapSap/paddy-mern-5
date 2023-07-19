@@ -5,10 +5,12 @@ export const RequestCardFull = ({
   order,
   id,
   store,
+  getAllOrders,
 }: {
   order: OrderInfoFromDB;
   id: string;
   store: StoreLocation;
+  getAllOrders: () => {};
 }) => {
   const [tracking, setTracking] = useState<string>();
   const [ibt, setIBT] = useState<string>();
