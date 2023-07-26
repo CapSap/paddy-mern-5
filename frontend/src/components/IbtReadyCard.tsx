@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { OrderInfoFromDB, StoreLocation } from "../Types";
 
-export const EcommCard = ({
+export const IbtReadyCard = ({
   order,
   id,
 }: {
