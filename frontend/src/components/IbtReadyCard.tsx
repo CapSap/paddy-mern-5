@@ -1,16 +1,51 @@
-import { useState } from "react";
-import { OrderInfoFromDB, StoreLocation } from "../Types";
+import { FormEvent, useState } from "react";
+import { OrderInfoFromDB, RequestFromDB, StoreLocation } from "../Types";
 
 export const IbtReadyCard = ({
   order,
   id,
+  getAllOrders,
 }: {
   order: OrderInfoFromDB;
   id: string;
+  getAllOrders: () => {};
 }) => {
   if (!order) {
     return <div>no order</div>;
   }
+
+  const [isIbtAccepeted, setIsIbtAccepted] = useState(false);
+
+  async function handleUpdate(
+    e: FormEvent<HTMLFormElement>,
+    request: RequestFromDB
+  ) {
+    e.preventDefault();
+    console.log(request);
+    // create a new request. values are coming from state, where default state is from db.
+    console.log(isIbtAccepeted);
+    const newRequest = {
+      ...request,
+      isIbtAccepeted: isIbtAccepeted,
+    };
+    // build the new replacement order
+    const newOrder = {
+      ...order,
+      orderedItems: [
+        ...order.orderedItems.filter((req) => req._id !== request._id),
+        newRequest,
+      ],
+    };
+    const response = await fetch(`http://localhost:3000/orders/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newOrder),
+    });
+
+    console.log(await response.json());
+    getAllOrders();
+  }
+
   return (
     <div className="border-indigo-100 border-2 m-3 p-3 rounded-xl" id={id}>
       <div className="mb-16 pl-4">
@@ -78,6 +113,22 @@ export const IbtReadyCard = ({
                   <p> {request.ibt}</p>
                 </div>
               ) : null}
+              <div>
+                <form onSubmit={(e) => handleUpdate(e, request)}>
+                  <label htmlFor="isIbtAccepeted">Has IBT been accepted?</label>
+                  <input
+                    type="checkbox"
+                    checked={isIbtAccepeted}
+                    onClick={() => setIsIbtAccepted(!isIbtAccepeted)}
+                  />
+                  <button
+                    className="mt-4 w-full inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                    type="submit"
+                  >
+                    Update
+                  </button>
+                </form>
+              </div>
             </div>
           );
         })}
