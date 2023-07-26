@@ -73,7 +73,12 @@ export const EcommView = () => {
           {ibtReadyOrders.length > 0 ? (
             ibtReadyOrders.map((order) => {
               return (
-                <IbtReadyCard order={order} id={order._id} key={order._id} />
+                <IbtReadyCard
+                  order={order}
+                  id={order._id}
+                  key={order._id}
+                  getAllOrders={getAllOrders}
+                />
               );
             })
           ) : (
