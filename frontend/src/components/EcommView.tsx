@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Order, OrderInfoFromDB, StoreLocation } from "../Types";
 import { RequestCardFull } from "./RequestCardFull";
 import { EcommCard } from "./EcommCard";
+import { IbtReadyCard } from "./IbtReadyCard";
 
 export const EcommView = () => {
   const [allOrders, setAllOrders] = useState<OrderInfoFromDB[]>();
@@ -71,7 +72,14 @@ export const EcommView = () => {
         <div className="w-3/4 grid grid-cols-3">
           {ibtReadyOrders.length > 0 ? (
             ibtReadyOrders.map((order) => {
-              return <EcommCard order={order} id={order._id} key={order._id} />;
+              return (
+                <IbtReadyCard
+                  order={order}
+                  id={order._id}
+                  key={order._id}
+                  getAllOrders={getAllOrders}
+                />
+              );
             })
           ) : (
             <div>There are no todos for you!</div>
