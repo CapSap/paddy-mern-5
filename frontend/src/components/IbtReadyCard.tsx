@@ -115,7 +115,9 @@ export const IbtReadyCard = ({
               ) : null}
               <div>
                 <form onSubmit={(e) => handleUpdate(e, request)}>
-                  <label htmlFor="isIbtAccepeted">Has IBT been accepted?</label>
+                  <label htmlFor="isIbtAccepeted" className="pr-2">
+                    Has IBT been accepted?
+                  </label>
                   <input
                     type="checkbox"
                     checked={isIbtAccepeted}
