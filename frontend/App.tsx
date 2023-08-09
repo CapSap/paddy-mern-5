@@ -3,15 +3,25 @@ import { Entry } from "./src/components/Entry";
 import { StoreView } from "./src/components/StoreView";
 import { EcommView } from "./src/components/EcommView";
 
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./src/routes/Root";
+
 const App = () => {
   return (
     <div>
       <EcommView />
-      {/* <StoreView /> */}
-      {/* <Entry /> */}
+      <StoreView />
+      <Entry />
     </div>
   );
 };
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <StoreView />,
+  },
+]);
 
 const container = document.getElementById("root");
 
@@ -20,4 +30,4 @@ if (!container) {
 }
 
 const root = createRoot(container);
-root.render(<App />);
+root.render(<RouterProvider router={router} />);
