@@ -4,7 +4,7 @@ import { StoreView } from "./src/components/StoreView";
 import { EcommView } from "./src/components/EcommView";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Root from "./src/routes/Root";
+import ErrorPage from "./src/routes/ErrorPage";
 
 const App = () => {
   return (
@@ -20,6 +20,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <StoreView />,
+    errorElement: <ErrorPage />,
   },
 ]);
 
