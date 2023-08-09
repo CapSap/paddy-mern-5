@@ -22,6 +22,14 @@ const router = createBrowserRouter([
     element: <StoreView />,
     errorElement: <ErrorPage />,
   },
+  {
+    path: "/entry",
+    element: <Entry />,
+  },
+  {
+    path: "/ecom",
+    element: <EcommView />,
+  },
 ]);
 
 const container = document.getElementById("root");
