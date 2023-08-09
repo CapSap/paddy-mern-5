@@ -3,6 +3,7 @@ import { Order, OrderInfoFromDB, StoreLocation } from "../Types";
 import { RequestCardFull } from "./RequestCardFull";
 import { EcommCard } from "./EcommCard";
 import { IbtReadyCard } from "./IbtReadyCard";
+import { NavBar } from "./NavBar";
 
 export const EcommView = () => {
   const [allOrders, setAllOrders] = useState<OrderInfoFromDB[]>();
@@ -40,6 +41,7 @@ export const EcommView = () => {
 
   return (
     <div>
+      <NavBar />
       Ecom view
       <div className="flex">
         <h2 className="w-1/4">Problem CNCs ({problemOrders.length})</h2>

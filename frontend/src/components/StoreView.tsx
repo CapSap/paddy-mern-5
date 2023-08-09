@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { RequestCard } from "./RequestCard";
 import { Order, OrderInfoFromDB, StoreLocation } from "../Types";
 import { RequestCardFull } from "./RequestCardFull";
+import { NavBar } from "./NavBar";
 
 export const StoreView = () => {
   const [allOrders, setAllOrders] = useState<OrderInfoFromDB[]>();
@@ -71,6 +72,7 @@ export const StoreView = () => {
   return (
     <div>
       <div>Welcome message + instructions?</div>
+      <NavBar />
       <div>
         <label
           className="inline-block text-gray-800 text-sm sm:text-base mb-2"
