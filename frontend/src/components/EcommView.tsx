@@ -41,7 +41,7 @@ export const EcommView = () => {
 
   return (
     <div>
-      <NavBar />
+      <NavBar currentPage={"ecomView"} />
       Ecom view
       <div className="flex">
         <h2 className="w-1/4">Problem CNCs ({problemOrders.length})</h2>

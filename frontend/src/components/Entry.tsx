@@ -95,7 +95,7 @@ export const Entry = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar currentPage={"entry"} />
 
       <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
         <div className="mb-10 md:mb-16">

@@ -71,8 +71,8 @@ export const StoreView = () => {
 
   return (
     <div>
+      <NavBar currentPage={"storeView"} />
       <div>Welcome message + instructions?</div>
-      <NavBar />
       <div>
         <label
           className="inline-block text-gray-800 text-sm sm:text-base mb-2"
