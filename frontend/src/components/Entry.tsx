@@ -252,7 +252,7 @@ export const Entry = () => {
 
           {orderedItems.map((request, index) => {
             return (
-              <div>
+              <div key={index + 1}>
                 <p>Request #{index + 1}</p>
                 <div>
                   <label
