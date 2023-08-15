@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
-export const NavBar = ({ currentPage }) => {
+export const NavBar = ({
+  currentPage,
+}: {
+  currentPage: "entry" | "storeView" | "ecomView";
+}) => {
   return (
     <nav className="bg-gray-800">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
