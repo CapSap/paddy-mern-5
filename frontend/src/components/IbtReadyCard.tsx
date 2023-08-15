@@ -119,9 +119,10 @@ export const IbtReadyCard = ({
                     Has IBT been accepted?
                   </label>
                   <input
+                    name="isIbtAccepeted"
                     type="checkbox"
                     checked={isIbtAccepeted}
-                    onClick={() => setIsIbtAccepted(!isIbtAccepeted)}
+                    onChange={() => setIsIbtAccepted(!isIbtAccepeted)}
                   />
                   {isIbtAccepeted ? (
                     <button
