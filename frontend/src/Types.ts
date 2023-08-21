@@ -4,7 +4,7 @@ export type StoreLocation =
   | "Ringwood"
   | "Canberra"
   | "Seven Hills"
-  | "Fortutude Valley"
+  | "Fortitude Valley"
   | "Perth"
   | "Hobart";
 
