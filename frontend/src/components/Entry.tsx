@@ -167,10 +167,20 @@ export const Entry = () => {
             <select
               required={true}
               id="pickupLocation"
-              value={pickupLocation}
+              value={"test"}
               onChange={(e) => {
-                setPickupLocation(e.target.value as StoreLocation);
+                // const value: StoreLocation = e.target.value;
+                setPickupLocation(e.target.value);
               }}
+              // onChange={(e) => {
+              //   if (
+              //     e.target.value === "Canberra" ||
+              //     e.target.value === "Fortitude Valley"
+              //   ) {
+              //     const value: StoreLocation = e.target.value;
+              //     setPickupLocation(e.target.value);
+              //   }
+              // }}
               className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
               defaultValue={"default"}
             >
