@@ -98,7 +98,7 @@ export const StoreView = () => {
           <option value="Fortitude Valley">Fortitude Valley - 416</option>
           <option value="Hobart">Hobart - 710</option>
           <option value="Melbourne">Melbourne - 314</option>
-          <option value="Parramatta">Parramatta - 208</option>
+          <option value="Seven Hills">Seven Hills - 208</option>
           <option value="Perth">Perth - 615</option>
           <option value="Ringwood">Ringwood - 319</option>
           <option value="Sydney">Sydney - 210</option>
