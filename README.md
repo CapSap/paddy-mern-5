@@ -12,7 +12,7 @@ I wanted to use IBM's carbon UI kit but at the time, they did not support react 
 
 
 ## How to run
-You'll need to have your ip address added to the database whitelist if you want to interact with it. Otherwise, there is a dummydata file that could be used.
+You'll need to have your ip address added to the mongodb database whitelist if you want to interact with it. Otherwise, there is a dummydata file that could be used.
 
 1. clone the repo
 2. ```cd frontend && npm i```
