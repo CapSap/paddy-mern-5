@@ -1,6 +1,6 @@
 # paddy-mern-5
 ## Description
-A click and collect coordination app. 
+A click and collect coordination app for a retail store.
 This is attempt number 5 at creating this app. Going to use typescript and the MERN stack
 This app is designed to replace several google sheets which are used to coordinate tasks and data flow between a central ecommerce location and 7 shop front locations.
 
