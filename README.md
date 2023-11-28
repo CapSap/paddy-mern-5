@@ -27,5 +27,3 @@ then either in the frontend folder or backend folder run (this will concurrently
 Burnout- this is attempt number 5 of this project. An ongoing challenge for me is to not get overwhelmed, and keep focused on small incremental improvements.
 
 UI Design- The previous system used a table/spreadsheet and I did not want to directly replicate that expereience as in some occasions, some fields will have more text than others. I thought a card design would be better able to handle different sized blocks of text. 
-
-Cors- todo
