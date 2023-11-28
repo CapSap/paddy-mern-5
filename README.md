@@ -4,7 +4,7 @@ A click and collect coordination app for a retail store.
 This is attempt number 5 at creating this app. 
 
 ## Slightly more in-depth description
-This app is designed to replace several google sheets which are used to coordinate tasks and data flow between a central ecommerce location and 7 shop front locations. A central location will communicate tasks to stores, stores will take some action and communicate some piece of data back. 
+This app is designed to replace several google sheets which are used to coordinate tasks and data flow between a central ecommerce location and 7 shop front locations. A central location will communicate tasks to stores, stores will take some action and communicate some piece of data back. Each task will have a status, and different things need to happen depending on status, AND different actions will trigger different statuses
 
 ## Tech
 MERN stack (MongoDB, Express, React, Node) with Typescript
